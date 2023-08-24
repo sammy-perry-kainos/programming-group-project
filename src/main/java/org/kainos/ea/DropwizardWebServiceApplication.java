@@ -33,6 +33,7 @@ public class DropwizardWebServiceApplication extends Application<DropwizardWebSe
     @Override
     public void run(final DropwizardWebServiceConfiguration configuration,
                     final Environment environment) {
+        environment.jersey().register(new DeliveryController());
         // TODO: implement application
         environment.jersey().register(new SalesEmployeeController());
         environment.jersey().register(new ProjectController());
