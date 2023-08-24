@@ -1,11 +1,10 @@
 package org.kainos.ea.db;
 
+import org.kainos.ea.cli.Project;
 import org.kainos.ea.cli.ProjectRequestAddClient;
 import org.kainos.ea.db.DatabaseConnector;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ProjectDao {
 
@@ -26,5 +25,26 @@ public class ProjectDao {
         st.setInt(2, id);
 
         st.executeUpdate();
+    }
+
+    public Project getProjectById(int id) throws SQLException {
+        Connection c = databaseConnector.getConnection();
+
+        Statement st = c.createStatement();
+
+        ResultSet rs = st.executeQuery("SELECT ProjectID, Name, Value, TechLead, ClientID"
+                + " FROM Projects WHERE ProjectID=" + id);
+
+        while (rs.next()) {
+            return new Project(
+                    rs.getInt("ProjectID"),
+                    rs.getString("Name"),
+                    rs.getDouble("Value"),
+                    rs.getInt("TechLead"),
+                    rs.getInt("ClientID")
+            );
+        }
+
+        return null;
     }
 }

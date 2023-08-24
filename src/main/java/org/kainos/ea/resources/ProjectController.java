@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import org.kainos.ea.api.ProjectService;
 import org.kainos.ea.cli.ProjectRequestAddClient;
 import org.kainos.ea.client.FailedToUpdateProjectException;
+import org.kainos.ea.client.InvalidProjectException;
 
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -30,6 +31,10 @@ public class ProjectController {
             System.err.println(e.getMessage());
 
             return Response.serverError().build();
+        } catch (InvalidProjectException e) {
+            System.err.println(e.getMessage());
+
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
     }
 }
