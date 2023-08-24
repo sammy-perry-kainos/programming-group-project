@@ -7,6 +7,7 @@ import org.kainos.ea.core.SalesEmployeeValidator;
 import org.kainos.ea.db.SalesDao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class SalesEmployeeService {
 
@@ -75,6 +76,19 @@ public class SalesEmployeeService {
             System.err.println(e.getMessage());
 
             throw new FailedToGetSalesEmployeeException();
+        }
+    }
+
+    public List<SalesEmployee> getAllSalesEmployees() throws FailedToGetSalesEmployeesException {
+
+        try {
+            List<SalesEmployee> employees = salesDao.getAllSalesEmployees();
+
+            return employees;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new FailedToGetSalesEmployeesException();
         }
     }
 }

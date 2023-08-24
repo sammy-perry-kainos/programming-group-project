@@ -75,4 +75,17 @@ public class SalesEmployeeController {
         }
     }
 
+    @GET
+    @Path("/SalesEmployees")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllSalesEmployees(){
+        try {
+            return Response.ok(salesEmployeeService.getAllSalesEmployees()).build();
+        } catch (FailedToGetSalesEmployeesException e) {
+            System.err.println(e.getMessage());
+
+            return Response.serverError().build();
+        }
+    }
+
 }
