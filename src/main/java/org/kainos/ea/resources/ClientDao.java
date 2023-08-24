@@ -1,2 +1,4 @@
-package org.kainos.ea.resources;public class ClientDao {
+package org.kainos.ea.resources;
+
+public class ClientDao {
 }
