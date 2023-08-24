@@ -10,9 +10,8 @@ public class SalesEmployee extends Employee{
     }
 
     private Double commision;
-    
 
-    private int EmployeeID;
+
 
     public SalesEmployee(int EmployeeID, String name, double salary, String bankNumber, String NI,double commission) {
         super(EmployeeID,name, salary, bankNumber, NI);
