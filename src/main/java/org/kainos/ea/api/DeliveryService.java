@@ -10,7 +10,11 @@ import org.kainos.ea.db.DeliveryDao;
 import java.sql.SQLException;
 
 public class DeliveryService {
-    private DeliveryDao deliveryDao = new DeliveryDao();
+    private DeliveryDao deliveryDao;
+
+    public DeliveryService(DeliveryDao deliveryDao) {
+        this.deliveryDao = deliveryDao;
+    }
 
     public int createDeliveryEmployee(DeliveryRequest deliveryRequest) throws FailedToCreateDeliveryEmployeeeException {
         try {
@@ -22,8 +26,8 @@ public class DeliveryService {
             return id;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+            throw new FailedToCreateDeliveryEmployeeeException();
         }
-        return -1;
     }
 
     public void updateDeliveryEmployee(int id, DeliveryRequest deliveryRequest) throws DeliveryEmployeeDoesNotExistException{

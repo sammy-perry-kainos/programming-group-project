@@ -5,6 +5,9 @@ import org.kainos.ea.api.DeliveryService;
 import org.kainos.ea.cli.DeliveryRequest;
 import org.kainos.ea.client.DeliveryEmployeeDoesNotExistException;
 import org.kainos.ea.client.FailedToCreateDeliveryEmployeeeException;
+import org.kainos.ea.client.FailedToGetDeliveryEmployeeException;
+import org.kainos.ea.db.DatabaseConnector;
+import org.kainos.ea.db.DeliveryDao;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -14,7 +17,7 @@ import java.sql.SQLException;
 @Api("Team SCM DeliveryEmployee API")
 @Path("/api")
 public class DeliveryController {
-    private DeliveryService deliveryService = new DeliveryService();
+    private DeliveryService deliveryService = new DeliveryService(new DeliveryDao(new DatabaseConnector()));
 
 
     @POST
@@ -42,6 +45,25 @@ public class DeliveryController {
         } catch (DeliveryEmployeeDoesNotExistException e) {
             System.err.println(e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+    }
+
+    @GET
+    @Path("/deliveryemployees/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+
+    public Response getDeliveryEmployeeById(@PathParam("id") int id){
+        try{
+            return Response.ok(deliveryService.getDeliveryEmployeeById(id)).build();
+        }catch(FailedToGetDeliveryEmployeeException e){
+            System.err.println(e.getMessage());
+
+            return Response.serverError().build();
+        }catch(DeliveryEmployeeDoesNotExistException e){
+            System.err.println(e.getMessage());
+
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
         }
     }
 }

@@ -6,7 +6,12 @@ import org.kainos.ea.cli.DeliveryRequest;
 import java.sql.*;
 
 public class DeliveryDao {
-    private DatabaseConnector databaseConnector = new DatabaseConnector();
+    private DatabaseConnector databaseConnector;
+
+
+    public DeliveryDao(DatabaseConnector databaseConnector) {
+        this.databaseConnector = databaseConnector;
+    }
 
 
     public int createDeliveryEmployee(DeliveryRequest deliveryRequest) throws SQLException {

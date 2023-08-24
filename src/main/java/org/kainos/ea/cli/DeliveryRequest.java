@@ -32,22 +32,24 @@ public class DeliveryRequest {
     }
 
     public String getNI() {
-        return NI;
+        return ni;
     }
 
     public void setNI(String NI) {
-        this.NI = NI;
+        this.ni = NI;
     }
 
     String bankNumber;
-    String NI;
+    String ni;
+
+
 
     @JsonCreator
     public DeliveryRequest(@JsonProperty("name") String name, @JsonProperty("salary") double salary, @JsonProperty("bankNumber") String bankNumber, @JsonProperty("NI") String NI) {
         this.name = name;
         this.salary = salary;
         this.bankNumber = bankNumber;
-        this.NI = NI;
+        this.ni = NI;
     }
 
 
