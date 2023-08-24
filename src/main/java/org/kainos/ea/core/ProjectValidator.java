@@ -9,8 +9,13 @@ import java.sql.SQLException;
 
 public class ProjectValidator {
 
-    private ClientDao clientDao = new ClientDao();
-    private ProjectDao projectDao = new ProjectDao();
+    private ClientDao clientDao;
+    private ProjectDao projectDao;
+
+    public ProjectValidator(ClientDao clientDao, ProjectDao projectDao) {
+        this.clientDao = clientDao;
+        this.projectDao = projectDao;
+    }
 
     public String isValidProject(int id, ProjectRequestAddClient project) {
         try {
@@ -18,15 +23,15 @@ public class ProjectValidator {
                 return "ClientID must exist in Client table";
             }
 
-            if (projectDao.getProjectById(id) == null) {
+            if (!projectDao.validateProjectId(id)) {
                 return "ProjectID must exist in Project table";
             }
 
             return null;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-        }
 
-        return null;
+            return e.getMessage();
+        }
     }
 }

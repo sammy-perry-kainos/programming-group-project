@@ -9,8 +9,13 @@ import org.kainos.ea.db.ProjectDao;
 import java.sql.SQLException;
 
 public class ProjectService {
-    private ProjectDao projectDao = new ProjectDao();
-    private ProjectValidator projectValidator = new ProjectValidator();
+    private ProjectDao projectDao;
+    private ProjectValidator projectValidator;
+
+    public ProjectService(ProjectDao projectDao, ProjectValidator projectValidator) {
+        this.projectDao = projectDao;
+        this.projectValidator = projectValidator;
+    }
 
     public void addClientToProject (int id, ProjectRequestAddClient project) throws FailedToUpdateProjectException, InvalidProjectException
     {

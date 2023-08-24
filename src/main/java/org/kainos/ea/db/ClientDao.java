@@ -1,12 +1,17 @@
 package org.kainos.ea.db;
 
+import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ClientDao {
-    private DatabaseConnector databaseConnector = new DatabaseConnector();
+    private DatabaseConnector databaseConnector;
+
+    public ClientDao(DatabaseConnector databaseConnector) {
+        this.databaseConnector = databaseConnector;
+    }
 
     public boolean validateClientId(int id) throws SQLException {
         Connection c = databaseConnector.getConnection();

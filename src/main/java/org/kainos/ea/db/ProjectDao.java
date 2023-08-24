@@ -8,14 +8,15 @@ import java.sql.*;
 
 public class ProjectDao {
 
-    private DatabaseConnector databaseConnector = new DatabaseConnector();
+    private DatabaseConnector databaseConnector;
+
+    public ProjectDao(DatabaseConnector databaseConnector) {
+        this.databaseConnector = databaseConnector;
+    }
 
     public void addClientToProject(int id, ProjectRequestAddClient project)
             throws SQLException {
         Connection c = databaseConnector.getConnection();
-
-        System.out.println(id);
-        System.out.println(project.getClientId());
 
         String updateStatement ="UPDATE Projects SET ClientID = ? WHERE ProjectID = ?";
 
@@ -27,24 +28,19 @@ public class ProjectDao {
         st.executeUpdate();
     }
 
-    public Project getProjectById(int id) throws SQLException {
+    public boolean validateProjectId(int id) throws SQLException {
         Connection c = databaseConnector.getConnection();
-
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT ProjectID, Name, Value, TechLead, ClientID"
-                + " FROM Projects WHERE ProjectID=" + id);
+        // Valid request
+        ResultSet rs = st.executeQuery("SELECT COUNT(ProjectID) FROM Projects WHERE ProjectID=" + id);
 
         while (rs.next()) {
-            return new Project(
-                    rs.getInt("ProjectID"),
-                    rs.getString("Name"),
-                    rs.getDouble("Value"),
-                    rs.getInt("TechLead"),
-                    rs.getInt("ClientID")
-            );
+            if (rs.getInt("COUNT(ProjectID)") > 0) {
+                return true;
+            }
         }
 
-        return null;
+        return false;
     }
 }
