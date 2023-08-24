@@ -9,7 +9,7 @@ public class SalesEmployee extends Employee{
         this.commision = commision;
     }
 
-    private Double commision;
+    private double commision;
 
 
 
