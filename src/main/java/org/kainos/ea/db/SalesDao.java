@@ -5,7 +5,10 @@ import org.kainos.ea.cli.SalesRequest;
 import java.sql.*;
 
 public class SalesDao {
-    DatabaseConnector databaseConnector = new DatabaseConnector();
+    DatabaseConnector databaseConnector;
+    public SalesDao(DatabaseConnector databaseConnector){
+        databaseConnector = new DatabaseConnector();
+    }
     public int createSalesEmployee(SalesRequest employee) throws SQLException {
         Connection c = databaseConnector.getConnection();
 
@@ -29,5 +32,15 @@ public class SalesDao {
         }
 
         return -1;
+    }
+
+    public void updateSales(int id, SalesRequest employee) throws SQLException{
+        Connection c = databaseConnector.getConnection();
+
+        String updateStatement = "UPDATE SalesEmployees SET Name = ?, Salary = ?, BankAccountNumber = ? WHERE SalesEmployeeID";
+
+        PreparedStatement st = c.prepareStatement(updateStatement);
+
+        st.setString(1, employee.getName());
     }
 }
