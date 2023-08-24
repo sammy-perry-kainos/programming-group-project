@@ -2,9 +2,9 @@ package org.kainos.ea.cli;
 
 public class Employee {
     private String name;
-    private Double salary;
+    private double salary;
 
-    public Employee(String name, Double salary, String bankNumber, String NI) {
+    public Employee(String name, double salary, String bankNumber, String NI) {
         this.name = name;
         this.salary = salary;
         this.bankNumber = bankNumber;
@@ -21,7 +21,7 @@ public class Employee {
         this.name = name;
     }
 
-    public Double getSalary() {
+    public double getSalary() {
         return salary;
     }
 
