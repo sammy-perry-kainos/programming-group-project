@@ -2,7 +2,6 @@ package org.kainos.ea.db;
 
 import org.kainos.ea.cli.ClientSalesEmployee;
 
-import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -57,5 +56,24 @@ public class ClientDao {
         }
 
         return clientSalesEmployeeList;
+    }
+
+    public String getClientWithHighestValueProjects() throws SQLException {
+
+        Connection c = databaseConnector.getConnection();
+        Statement st = c.createStatement();
+
+        ResultSet rs = st.executeQuery("SELECT Clients.Name AS Name FROM Projects " +
+                        "JOIN Clients on Projects.ClientID = Clients.ClientID " +
+                        "GROUP BY Projects.ClientID " +
+                        "ORDER BY SUM(Value) DESC LIMIT 1;");
+
+        String clientName = null;
+
+        while (rs.next()) {
+            clientName = rs.getString("Name");
+        }
+
+        return clientName;
     }
 }

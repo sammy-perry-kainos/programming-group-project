@@ -28,4 +28,19 @@ public class ClientService {
 
         return clientSalesEmployeeList;
     }
+
+    public String getClientWithHighestValueProjects() throws FailedToGetClientException {
+
+        String clientName = null;
+
+        try {
+            clientName = clientDao.getClientWithHighestValueProjects();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new FailedToGetClientException();
+        }
+
+        return clientName;
+    }
 }
