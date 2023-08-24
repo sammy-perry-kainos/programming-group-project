@@ -11,8 +11,8 @@ public class SalesEmployee extends Employee{
 
     private double commision;
 
-    public SalesEmployee(String name, double salary, String bankNumber, String NI,double commission) {
-        super(name, salary, bankNumber, NI);
+    public SalesEmployee(int EmployeeId, String name, double salary, String bankNumber, String NI,double commission) {
+        super(EmployeeId, name, salary, bankNumber, NI);
         this.commision = commission;
     }
 }
