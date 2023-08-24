@@ -1,2 +1,8 @@
-package org.kainos.ea.client;public class FailedToUpdateSalesEmployeeException {
+package org.kainos.ea.client;
+
+public class FailedToUpdateSalesEmployeeException extends Throwable{
+    @Override
+    public String getMessage(){
+        return "Failed to update SalesEmployee";
+    }
 }
