@@ -45,9 +45,9 @@ public class SalesEmployeeController {
     @PUT
     @Path("/SalesEmployee/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateProduct(@PathParam("id") int id, SalesRequest product){
+    public Response updateProduct(@PathParam("id") int id, SalesRequest employee){
         try{
-            salesEmployeeService.updateSalesEmployee(id, product);
+            salesEmployeeService.updateSalesEmployee(id, employee);
 
             return Response.ok().build();
         } catch (SalesEmployeeDoesNotExistException | InvalidSalesEmployeeException e) {
