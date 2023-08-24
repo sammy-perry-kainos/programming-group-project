@@ -9,7 +9,7 @@ public class SalesDao {
     public int createSalesEmployee(SalesRequest employee) throws SQLException {
         Connection c = databaseConnector.getConnection();
 
-        String insertStatement = "INSERT INTO SalesEmployee (Name, Salary, BankAccountNumber, NationalInsuranceNumber, CommissionRate) " +
+        String insertStatement = "INSERT INTO SalesEmployees (Name, Salary, BankAccountNumber, NationalInsuranceNumber, CommissionRate) " +
                 "VALUES(?, ?, ?, ?, ?)";
 
         PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
