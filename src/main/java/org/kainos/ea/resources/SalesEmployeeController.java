@@ -82,7 +82,9 @@ public class SalesEmployeeController {
         try {
             return Response.ok(salesEmployeeService.getAllSalesEmployees()).build();
         } catch (FailedToGetSalesEmployeesException e) {
-            throw new RuntimeException(e);
+            System.err.println(e.getMessage());
+
+            return Response.serverError().build();
         }
     }
 
