@@ -49,7 +49,7 @@ VALUES
     ('Project 9', 70000.00, 4, 1),
     ('Project 10', 85000.00, 5, 3);
     
-INSERT INTO DeliveryEmployees_Projects (DeliveryEmployeeID, ProjectID)
+/*INSERT INTO DeliveryEmployees_Projects (DeliveryEmployeeID, ProjectID)
 VALUES
     (1, 1),
     (2, 2),
@@ -60,7 +60,7 @@ VALUES
     (7, 7),
     (8, 8),
     (9, 9),
-    (10, 10);
+    (10, 10);*/
     
 SELECT * FROM Clients;
 

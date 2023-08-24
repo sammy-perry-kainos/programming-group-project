@@ -1,6 +1,7 @@
 package org.kainos.ea.api;
 
 import org.kainos.ea.cli.ProjectRequestAddClient;
+import org.kainos.ea.client.FailedToUpdateProjectException;
 import org.kainos.ea.db.ProjectDao;
 
 import java.sql.SQLException;
@@ -8,13 +9,14 @@ import java.sql.SQLException;
 public class ProjectService {
     private ProjectDao projectDao = new ProjectDao();
 
-    public void addClientToProject(int projectId, ProjectRequestAddClient project)
+    public void addClientToProject (int id, ProjectRequestAddClient project) throws FailedToUpdateProjectException
     {
         try {
-            projectDao.addClientToProject(projectId, project);
+            projectDao.addClientToProject(id, project);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.err.println(e.getMessage());
+
+            throw new FailedToUpdateProjectException();
         }
     }
-
 }

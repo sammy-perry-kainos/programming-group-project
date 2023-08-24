@@ -11,16 +11,19 @@ public class ProjectDao {
 
     private DatabaseConnector databaseConnector = new DatabaseConnector();
 
-    public void addClientToProject(int projectId, ProjectRequestAddClient project)
+    public void addClientToProject(int id, ProjectRequestAddClient project)
             throws SQLException {
         Connection c = databaseConnector.getConnection();
 
-        String updateStatement ="UPDATE Projects SET ClientId = ? WHERE ProjectId = ?";
+        System.out.println(id);
+        System.out.println(project.getClientId());
+
+        String updateStatement ="UPDATE Projects SET ClientID = ? WHERE ProjectID = ?";
 
         PreparedStatement st = c.prepareStatement(updateStatement);
 
         st.setInt(1, project.getClientId());
-        st.setInt(2, projectId);
+        st.setInt(2, id);
 
         st.executeUpdate();
     }
