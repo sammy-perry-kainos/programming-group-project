@@ -4,10 +4,7 @@ import io.swagger.annotations.Api;
 import org.kainos.ea.api.SalesEmployeeService;
 import org.kainos.ea.cli.SalesEmployee;
 import org.kainos.ea.cli.SalesRequest;
-import org.kainos.ea.client.FailedToCreateSalesException;
-import org.kainos.ea.client.FailedToUpdateSalesEmployeeException;
-import org.kainos.ea.client.InvalidSalesEmployeeException;
-import org.kainos.ea.client.SalesEmployeeDoesNotExistException;
+import org.kainos.ea.client.*;
 import org.kainos.ea.core.SalesEmployeeValidator;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.SalesDao;
@@ -60,4 +57,22 @@ public class SalesEmployeeController {
             return Response.serverError().build();
         }
     }
+
+    @GET
+    @Path("/SalesEmployee/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response viewSalesEmployee(@PathParam("id") int id){
+        try {
+            return Response.ok(salesEmployeeService.viewSalesEmployee(id)).build();
+        } catch (SalesEmployeeDoesNotExistException e) {
+            System.err.println(e.getMessage());
+
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        } catch (FailedToGetSalesEmployeeException e) {
+            System.err.println(e.getMessage());
+
+            return Response.serverError().build();
+        }
+    }
+
 }
