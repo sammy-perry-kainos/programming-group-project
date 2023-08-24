@@ -1,10 +1,7 @@
 package org.kainos.ea.db;
 
-import org.kainos.ea.cli.Client;
-import org.kainos.ea.cli.ClientName;
 import org.kainos.ea.cli.ClientSalesEmployee;
 
-import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

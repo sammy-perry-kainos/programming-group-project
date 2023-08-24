@@ -1,6 +1,5 @@
 package org.kainos.ea.api;
 
-import org.kainos.ea.cli.ClientName;
 import org.kainos.ea.cli.ClientSalesEmployee;
 import org.kainos.ea.client.FailedToGetClientException;
 import org.kainos.ea.db.ClientDao;
