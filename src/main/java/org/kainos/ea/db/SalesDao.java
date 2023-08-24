@@ -4,6 +4,8 @@ import org.kainos.ea.cli.SalesEmployee;
 import org.kainos.ea.cli.SalesRequest;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SalesDao {
     DatabaseConnector databaseConnector;
@@ -71,5 +73,29 @@ public class SalesDao {
         st.setInt(5, id);
 
         st.executeUpdate();
+    }
+
+    public List<SalesEmployee> getAllSalesEmployees() throws SQLException{
+        Connection c = databaseConnector.getConnection();
+        Statement st = c.createStatement();
+
+        ResultSet rs = st.executeQuery("SELECT SalesEmployeeID, Name, Salary, BankAccountNumber, NationalInsuranceNumber, CommissionRate FROM SalesEmployees");
+
+        List<SalesEmployee> employees = new ArrayList<>();
+
+        while(rs.next()){
+            SalesEmployee employee =  new SalesEmployee(
+                    rs.getInt("SalesEmployeeID"),
+                    rs.getString("Name"),
+                    rs.getDouble("Salary"),
+                    rs.getString("BankAccountNumber"),
+                    rs.getString("NationalInsuranceNumber"),
+                    rs.getDouble("CommissionRate")
+            );
+
+            employees.add(employee);
+        }
+
+        return employees;
     }
 }
