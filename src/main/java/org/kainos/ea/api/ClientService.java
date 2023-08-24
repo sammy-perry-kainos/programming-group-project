@@ -1,5 +1,6 @@
 package org.kainos.ea.api;
 
+import org.kainos.ea.cli.ClientName;
 import org.kainos.ea.cli.ClientSalesEmployee;
 import org.kainos.ea.client.FailedToGetClientException;
 import org.kainos.ea.db.ClientDao;
@@ -27,5 +28,20 @@ public class ClientService {
         }
 
         return clientSalesEmployeeList;
+    }
+
+    public ClientName getClientWithHighestValueProjects() throws FailedToGetClientException {
+
+        ClientName clientName = null;
+
+        try {
+            clientName = clientDao.getClientWithHighestValueProjects();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new FailedToGetClientException();
+        }
+
+        return clientName;
     }
 }

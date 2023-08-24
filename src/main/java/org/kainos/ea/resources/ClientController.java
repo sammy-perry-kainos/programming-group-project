@@ -33,4 +33,17 @@ public class ClientController {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
     }
+
+    @GET
+    @Path("/client_highest_value")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getClientWithHighestValueProjects() {
+        try {
+            return Response.ok(clientService.getClientWithHighestValueProjects()).build();
+        } catch (FailedToGetClientException e) {
+            System.err.println(e.getMessage());
+
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+    }
 }
