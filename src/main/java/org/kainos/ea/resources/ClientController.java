@@ -43,7 +43,7 @@ public class ClientController {
         } catch (FailedToGetClientException e) {
             System.err.println(e.getMessage());
 
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+            return Response.serverError().build();
         }
     }
 }

@@ -1,7 +1,6 @@
 package org.kainos.ea;
 
 import io.dropwizard.Application;
-import io.dropwizard.cli.Cli;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;

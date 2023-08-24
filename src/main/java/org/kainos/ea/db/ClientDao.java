@@ -61,7 +61,7 @@ public class ClientDao {
         return clientSalesEmployeeList;
     }
 
-    public ClientName getClientWithHighestValueProjects() throws SQLException {
+    public String getClientWithHighestValueProjects() throws SQLException {
 
         Connection c = databaseConnector.getConnection();
         Statement st = c.createStatement();
@@ -71,10 +71,10 @@ public class ClientDao {
                         "GROUP BY Projects.ClientID " +
                         "ORDER BY SUM(Value) DESC LIMIT 1;");
 
-        ClientName clientName = null;
+        String clientName = null;
 
         while (rs.next()) {
-            clientName = new ClientName(rs.getString("Name"));
+            clientName = rs.getString("Name");
         }
 
         return clientName;

@@ -30,9 +30,9 @@ public class ClientService {
         return clientSalesEmployeeList;
     }
 
-    public ClientName getClientWithHighestValueProjects() throws FailedToGetClientException {
+    public String getClientWithHighestValueProjects() throws FailedToGetClientException {
 
-        ClientName clientName = null;
+        String clientName = null;
 
         try {
             clientName = clientDao.getClientWithHighestValueProjects();
