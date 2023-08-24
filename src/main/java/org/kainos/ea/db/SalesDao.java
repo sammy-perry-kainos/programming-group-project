@@ -6,7 +6,6 @@ import java.sql.*;
 
 public class SalesDao {
     DatabaseConnector databaseConnector = new DatabaseConnector();
-
     public int createSalesEmployee(SalesRequest employee) throws SQLException {
         Connection c = databaseConnector.getConnection();
 
