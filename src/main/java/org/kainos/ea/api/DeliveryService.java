@@ -8,6 +8,7 @@ import org.kainos.ea.client.FailedToGetDeliveryEmployeeException;
 import org.kainos.ea.db.DeliveryDao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class DeliveryService {
     private DeliveryDao deliveryDao;
@@ -58,5 +59,13 @@ public class DeliveryService {
         }
     }
 
-    
+    public List<DeliveryEmployee> getAllDeliveryEmployees() throws FailedToGetDeliveryEmployeeException{
+        try{
+            List<DeliveryEmployee> deliveryEmployeeList = deliveryDao.getAllDeliveryEmployees();
+            return deliveryEmployeeList;
+        }catch(SQLException e){
+            System.err.println(e.getMessage());
+            throw new FailedToGetDeliveryEmployeeException();
+        }
+    }
 }

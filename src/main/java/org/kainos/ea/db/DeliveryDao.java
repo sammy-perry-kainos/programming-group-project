@@ -4,6 +4,8 @@ import org.kainos.ea.cli.DeliveryEmployee;
 import org.kainos.ea.cli.DeliveryRequest;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DeliveryDao {
     private DatabaseConnector databaseConnector;
@@ -69,6 +71,27 @@ public class DeliveryDao {
         st.setInt(4, id);
 
         st.executeUpdate();
+    }
+
+    public List<DeliveryEmployee> getAllDeliveryEmployees() throws SQLException{
+        Connection c = databaseConnector.getConnection();
+        Statement st = c.createStatement();
+
+        ResultSet rs = st.executeQuery("SELECT DeliveryEmployeeID, Name, Salary, BankAccountNumber, NationalInsuranceNumber FROM DeliveryEmployees");
+
+        List<DeliveryEmployee> deliveryEmployeeList = new ArrayList<>();
+
+        while(rs.next()){
+            DeliveryEmployee deliveryEmployee = new DeliveryEmployee(
+                    rs.getInt("DeliveryEmployeeID"),
+                    rs.getString("Name"),
+                    rs.getDouble("Salary"),
+                    rs.getString("BankAccountNumber"),
+                    rs.getString("NationalInsuranceNumber")
+            );
+            deliveryEmployeeList.add(deliveryEmployee);
+        }
+        return deliveryEmployeeList;
     }
 
 }

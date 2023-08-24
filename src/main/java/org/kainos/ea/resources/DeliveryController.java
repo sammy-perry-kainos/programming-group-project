@@ -66,4 +66,18 @@ public class DeliveryController {
 
         }
     }
+
+    @GET
+    @Path("/deliveryemployees")
+    @Produces(MediaType.APPLICATION_JSON)
+
+    public Response getDeliveryEmployees(){
+        try {
+            return Response.ok(deliveryService.getAllDeliveryEmployees()).build();
+        } catch (FailedToGetDeliveryEmployeeException e) {
+            System.err.println(e.getMessage());
+
+            return Response.serverError().build();
+        }
+    }
 }
