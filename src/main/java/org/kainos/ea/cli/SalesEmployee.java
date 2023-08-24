@@ -10,16 +10,7 @@ public class SalesEmployee extends Employee{
     }
 
     private Double commision;
-
-    @Override
-    public int getEmployeeID() {
-        return EmployeeID;
-    }
-
-    @Override
-    public void setEmployeeID(int employeeID) {
-        EmployeeID = employeeID;
-    }
+    
 
     private int EmployeeID;
 
