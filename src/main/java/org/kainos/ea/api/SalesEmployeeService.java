@@ -42,7 +42,7 @@ public class SalesEmployeeService {
         }
     }
 
-    public void update(int id, SalesRequest employee) throws InvalidSalesEmployeeException, FailedToUpdateSalesEmployeeException, SalesEmployeeDoesNotExistException {
+    public void updateSalesEmployee(int id, SalesRequest employee) throws InvalidSalesEmployeeException, FailedToUpdateSalesEmployeeException, SalesEmployeeDoesNotExistException {
         try{
             String validation = salesEmployeeValidator.isValidSalesEmployee(employee);
 
